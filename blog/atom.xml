@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://docs.healthblocks.io/blog</id>
+    <title>Healthblocks Blog</title>
+    <updated>2021-04-07T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://docs.healthblocks.io/blog"/>
+    <subtitle>Healthblocks Blog</subtitle>
+    <icon>https://docs.healthblocks.io/img/healthblocks-logo-white.png</icon>
+    <entry>
+        <title type="html"><![CDATA[Hello world!]]></title>
+        <id>hello-world</id>
+        <link href="https://docs.healthblocks.io/blog/hello-world"/>
+        <updated>2021-04-07T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Our technical docs are now published on https://docs.healthblocks.io]]></summary>
+    </entry>
+</feed>
