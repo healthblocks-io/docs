@@ -4,7 +4,7 @@ module.exports = {
   tagline: 'Build engaging digital health solutions, faster.',
   url: 'https://docs.healthblocks.io',
   baseUrl: '/',
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/healthblocks-logo-white.png',
   organizationName: 'healthblocks-io', // Usually your GitHub org/user name.
