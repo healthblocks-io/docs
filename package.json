@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "typedoc": "GENERATE_TYPEDOC=1 docusaurus start",
     "docusaurus": "docusaurus",
     "dev": "docusaurus start",
     "start": "docusaurus start",
@@ -20,6 +21,7 @@
     "@edno/docusaurus2-graphql-doc-generator": "^1.1.0",
     "@mdx-js/react": "^1.6.21",
     "clsx": "^1.1.1",
+    "docusaurus-plugin-typedoc": "^0.12.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "redocusaurus": "^0.3.2"
