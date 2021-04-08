@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[10,38],{242:function(n,e){},243:function(n,e){},253:function(n,e){},82:function(n,e,t){"use strict";t.r(e);var o=t(0),c=t.n(o),p=t(62);e.default=function(){return c.a.createElement(p.default,{layoutProps:{title:"Open API Docs",description:"Open API Reference Docs for API"},spec:{type:"url",content:"/openapi.yaml"}})}}}]);

@@ -1,0 +1,626 @@
+openapi: 3.0.1
+info:
+  title: Healthblocks REST API
+  description: 'Build engaging digital health solutions, faster. Learn more at [https://healthblocks.io](https://healthblocks.io)'
+  termsOfService: https://healthblocks.io/terms/
+  contact:
+    email: dev@healthblocks.io
+  version: 1.0.0
+externalDocs:
+  description: Client SDKs
+  url: https://docs.healthblocks.io
+servers:
+  - url: https://api.dev.healthblocks.io/api
+  - url: https://api.healthblocks.io/api
+tags:
+  - name: config
+    description: Manage general project data
+  - name: auth
+    description: Manage user specific data
+  - name: project
+    description: Manage general project data
+  - name: user
+    description: Manage user specific data
+paths:
+  /auth:
+    get:
+      summary: Get details of authenticated user
+      operationId: getAuth
+      parameters:
+        - name: Authorization
+          in: header
+          description: ID of project
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResult'
+        401:
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        404:
+          description: Project not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+      security:
+        - jwt:
+            - user
+    post:
+      summary: authenticates the user
+      operationId: postAuth
+      parameters:
+        - name: pid
+          in: query
+          description: ID of project
+          required: true
+          schema:
+            type: string
+        - name: refresh_token
+          in: query
+          description: Token to
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                id_token:
+                  type: string
+                  description: Auth0 verified credentials
+                username:
+                  type: string
+                  description: Auth0 (passwordless) username
+                otp:
+                  type: string
+                  description: Auth0 passwordless otp token
+                password:
+                  type: string
+                  description: Auth0 password
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResult'
+        401:
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        404:
+          description: Project not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+      security:
+        - jwt:
+            - user
+  /env:
+    get:
+      tags:
+        - config
+      summary: get service configuration
+      operationId: env
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  api:
+                    type: string
+                  dashboard:
+                    type: string
+                  graph:
+                    type: string
+                  publicUploads:
+                    type: string
+                  uploads:
+                    type: string
+                example:
+                  {
+                    'api': 'https://api.healthblocks.io',
+                    'dashboard': 'https://dashboard.healthblocks.io',
+                    'graph': 'https://graph.healthblocks.io',
+                    'uploads': 'https://uploads.healthblocks.io',
+                  }
+      security:
+        - jwt:
+            - user
+  /projects/{pid}:
+    get:
+      tags:
+        - project
+      summary: Get project configuration by pid
+      description: Returns a single project
+      operationId: getProjectById
+      parameters:
+        - name: pid
+          in: path
+          description: ID of project to return
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        400:
+          description: Invalid pid supplied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        404:
+          description: Project not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+  /uploads:
+    post:
+      tags:
+        - user
+      summary: uploads an image
+      operationId: uploadFile
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                additionalMetadata:
+                  type: string
+                  description: Additional data to pass to server
+                file:
+                  type: string
+                  description: file to upload
+                  format: binary
+      responses:
+        200:
+          description: successful operation
+      security:
+        - jwt:
+            - user
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        username:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        phone:
+          type: string
+        userStatus:
+          type: integer
+          description: User Status
+          format: int32
+    Project:
+      title: Project
+      type: object
+      properties:
+        pid:
+          type: string
+        name:
+          type: string
+        auth0:
+          type: object
+          properties:
+            domain:
+              type: string
+            clientId:
+              type: string
+            passwordless:
+              type: boolean
+            email_password:
+              type: boolean
+            passwordless_sms:
+              type: boolean
+            passwordless_email_code:
+              type: boolean
+            passwordless_email_link:
+              type: boolean
+          required:
+            - domain
+            - clientId
+            - passwordless
+            - email_password
+            - passwordless_sms
+            - passwordless_email_code
+            - passwordless_email_link
+        config:
+          type: object
+          properties:
+            shopify:
+              type: object
+              properties:
+                domain:
+                  type: string
+                tabBar:
+                  type: object
+                  properties:
+                    cart:
+                      type: boolean
+                    shop:
+                      type: boolean
+                  required:
+                    - cart
+                    - shop
+                enabled:
+                  type: boolean
+                showInHome:
+                  type: boolean
+                linkToDetail:
+                  type: boolean
+                storefrontAccessToken:
+                  type: string
+              required:
+                - domain
+                - tabBar
+                - enabled
+                - showInHome
+                - linkToDetail
+                - storefrontAccessToken
+            languages:
+              type: array
+              items:
+                type: string
+            medication:
+              type: object
+              properties:
+                name:
+                  type: string
+                moments:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      time:
+                        type: string
+                    required:
+                      - name
+                      - time
+              required:
+                - name
+                - moments
+            defaultLanguage:
+              type: string
+            airtableAssessment:
+              type: boolean
+            activityKindOptions:
+              type: array
+              items:
+                type: string
+            airtableQuestionnairesList:
+              type: array
+              items: {}
+            appName:
+              type: string
+            appLogo:
+              type: object
+              properties:
+                id:
+                  type: string
+                url:
+                  type: string
+                filename:
+                  type: string
+                size:
+                  type: number
+                type:
+                  type: string
+                thumbnails:
+                  type: object
+                  properties:
+                    small:
+                      type: object
+                      properties:
+                        url:
+                          type: string
+                        width:
+                          type: number
+                        height:
+                          type: number
+                      required:
+                        - url
+                        - width
+                        - height
+                    large:
+                      type: object
+                      properties:
+                        url:
+                          type: string
+                        width:
+                          type: number
+                        height:
+                          type: number
+                      required:
+                        - url
+                        - width
+                        - height
+                    full:
+                      type: object
+                      properties:
+                        url:
+                          type: string
+                        width:
+                          type: number
+                        height:
+                          type: number
+                      required:
+                        - url
+                        - width
+                        - height
+                  required:
+                    - small
+                    - large
+                    - full
+              required:
+                - id
+                - url
+                - filename
+                - size
+                - type
+                - thumbnails
+            privacyURL:
+              type: string
+            termsAndConditionsURL:
+              type: string
+            airtableQuestions:
+              type: string
+            airtableSuggestions:
+              type: string
+            airtableTranslations:
+              type: string
+            theme.primary.color:
+              type: string
+            suggestionFallbackImage:
+              type: object
+              properties:
+                id:
+                  type: string
+                url:
+                  type: string
+                filename:
+                  type: string
+                size:
+                  type: number
+                type:
+                  type: string
+                thumbnails:
+                  type: object
+                  properties:
+                    small:
+                      type: object
+                      properties:
+                        url:
+                          type: string
+                        width:
+                          type: number
+                        height:
+                          type: number
+                      required:
+                        - url
+                        - width
+                        - height
+                    large:
+                      type: object
+                      properties:
+                        url:
+                          type: string
+                        width:
+                          type: number
+                        height:
+                          type: number
+                      required:
+                        - url
+                        - width
+                        - height
+                    full:
+                      type: object
+                      properties:
+                        url:
+                          type: string
+                        width:
+                          type: number
+                        height:
+                          type: number
+                      required:
+                        - url
+                        - width
+                        - height
+                  required:
+                    - small
+                    - large
+                    - full
+              required:
+                - id
+                - url
+                - filename
+                - size
+                - type
+                - thumbnails
+            userInvite:
+              type: string
+            auth:
+              type: string
+            mixpanel:
+              type: string
+            timelineImage:
+              type: object
+              properties:
+                id:
+                  type: string
+                url:
+                  type: string
+                filename:
+                  type: string
+                size:
+                  type: number
+                type:
+                  type: string
+                thumbnails:
+                  type: object
+                  properties:
+                    small:
+                      type: object
+                      properties:
+                        url:
+                          type: string
+                        width:
+                          type: number
+                        height:
+                          type: number
+                      required:
+                        - url
+                        - width
+                        - height
+                    large:
+                      type: object
+                      properties:
+                        url:
+                          type: string
+                        width:
+                          type: number
+                        height:
+                          type: number
+                      required:
+                        - url
+                        - width
+                        - height
+                    full:
+                      type: object
+                      properties:
+                        url:
+                          type: string
+                        width:
+                          type: number
+                        height:
+                          type: number
+                      required:
+                        - url
+                        - width
+                        - height
+                  required:
+                    - small
+                    - large
+                    - full
+              required:
+                - id
+                - url
+                - filename
+                - size
+                - type
+                - thumbnails
+            auth0:
+              type: object
+              properties:
+                domain:
+                  type: string
+                clientId:
+                  type: string
+                passwordless:
+                  type: boolean
+                email_password:
+                  type: boolean
+                passwordless_sms:
+                  type: boolean
+                passwordless_email_code:
+                  type: boolean
+                passwordless_email_link:
+                  type: boolean
+              required:
+                - domain
+                - clientId
+                - passwordless
+                - email_password
+                - passwordless_sms
+                - passwordless_email_code
+                - passwordless_email_link
+        blocks:
+          type: array
+          items:
+            type: string
+        env:
+          type: object
+          properties:
+            api:
+              type: string
+            dashboard:
+              type: string
+            graph:
+              type: string
+            publicUploads:
+              type: string
+            uploads:
+              type: string
+          required:
+            - api
+            - dashboard
+            - graph
+      required:
+        - pid
+        - name
+        - auth0
+        - config
+        - blocks
+        - questions
+        - replies
+        - env
+    ApiError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            type:
+              type: string
+            message:
+              type: string
+    AuthResult:
+      type: object
+      properties:
+        id_token:
+          type: string
+          description: JWT token for authenticating API requests
+        refresh_token:
+          type: string
+          description: Token for refreshing JWT token
+        signature:
+          type: string
+          description: Token for file uploads
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
