@@ -1,15 +1,16 @@
 module.exports = {
   docs: [
+    'getting-started',
     {
       type: 'category',
       label: 'Guides',
       collapsed: false,
       items: [
-        'getting-started',
         'guides/initial-project-setup',
-        'guides/e2e-testing-with-detox',
-        'guides/graphiql-console',
+        'guides/analytics-tracking-events',
         'guides/translations',
+        'guides/graphiql-console',
+        'guides/e2e-testing-with-detox',
         'guides/upgrade',
       ],
     },
@@ -49,6 +50,11 @@ module.exports = {
       label: 'Server',
       collapsed: false,
       items: ['@healthblocks-io/server'],
+    },
+    {
+      type: 'link',
+      label: 'API reference',
+      href: '/api',
     },
     {
       type: 'link',

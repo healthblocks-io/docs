@@ -18,9 +18,15 @@ module.exports = {
       },
       items: [
         {
-          to: 'docs/',
+          to: 'docs',
           activeBasePath: 'docs',
           label: 'Docs',
+          position: 'left',
+        },
+        {
+          to: 'api',
+          activeBasePath: 'api',
+          label: 'API',
           position: 'left',
         },
         { to: 'blog', label: 'Blog', position: 'left' },
@@ -94,6 +100,16 @@ module.exports = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
+      },
+    ],
+    [
+      'redocusaurus',
+      {
+        specs: [
+          {
+            specUrl: 'https://redocly.github.io/redoc/openapi.yaml',
+          },
+        ],
       },
     ],
   ],

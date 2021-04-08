@@ -2,6 +2,13 @@
 title: Accessing the GraphiQL console
 ---
 
+### Use dashboard GraphiQL with anonymous user
+
+1. Sign in to the dashboard `https://dashboard.healthblocks.io`
+2. Visit Settings > GraphiQL
+
+### Use GraphiQL with anonymous user
+
 You can use the [GraphiQL Electron app](https://www.electronjs.org/apps/graphiql) to connect:
 
 1. Set GraphQL endpoint: `https://graph.healthblocks.io/v1/graphql`
