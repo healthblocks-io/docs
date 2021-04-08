@@ -1,8 +1,6 @@
 ---
-title: Examples
+title: "@healthblocks-io/apollo"
 ---
-
-### @healthblocks-io/apollo
 
 This package has several hooks to easily access and update user data.
 

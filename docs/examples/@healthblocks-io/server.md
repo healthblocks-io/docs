@@ -2,8 +2,6 @@
 title: Serverside integration
 ---
 
-# @healthblocks-io/server
-
 @healthblocks-io/server DOES NOT EXIST YET, see code below
 
 ### Next.js example WITHOUT verifying user credentials

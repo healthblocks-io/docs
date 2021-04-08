@@ -1,5 +1,5 @@
 ---
-title: Icon
+title: Custom Icon
 ---
 
 The Icon component receives the name of icon as prop. The name can be any of the 28 built-in icons. The Button component accepts the same icon names, also the custom ones.

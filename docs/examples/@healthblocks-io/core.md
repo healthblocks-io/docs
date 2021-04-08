@@ -1,5 +1,5 @@
 ---
-title: Examples
+title: "@healthblocks-io/core"
 ---
 
 ### @healthblocks-io/core/app
