@@ -2,7 +2,7 @@ openapi: 3.0.1
 info:
   title: Healthblocks REST API
   description: 'Build engaging digital health solutions, faster. Learn more at [https://healthblocks.io](https://healthblocks.io)'
-  termsOfService: https://healthblocks.io/terms/
+  termsOfService: https://www.healthblocks.io/privacy-policy
   contact:
     email: dev@healthblocks.io
   version: 1.0.0
@@ -24,12 +24,14 @@ tags:
 paths:
   /auth:
     get:
+      tags:
+        - auth
       summary: Get details of authenticated user
       operationId: getAuth
       parameters:
         - name: Authorization
           in: header
-          description: ID of project
+          description: Bearer token
           required: true
           schema:
             type: string
@@ -56,6 +58,8 @@ paths:
         - jwt:
             - user
     post:
+      tags:
+        - auth
       summary: authenticates the user
       operationId: postAuth
       parameters:

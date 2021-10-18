@@ -5,8 +5,8 @@ function CustomPage() {
   return (
     <ApiDoc
       layoutProps={{
-        title: 'Open API Docs',
-        description: `Open API Reference Docs for API`,
+        title: 'API Reference',
+        description: `API Reference for Healthblocks REST API`,
       }}
       spec={{
         type: 'url',
