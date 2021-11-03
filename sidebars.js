@@ -6,7 +6,9 @@ module.exports = {
       label: 'Guides',
       collapsed: false,
       items: [
-        'guides/initial-project-setup',
+        'guides/expo-template-app',
+        'guides/next-template-app',
+        'guides/express',
         'guides/analytics-tracking-events',
         'guides/translations',
         'guides/graphiql-console',
