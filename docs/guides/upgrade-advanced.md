@@ -12,10 +12,6 @@ Version 3.x is compatible with Expo 40
 
 Version 4.x is compatible with Expo 41
 
-Version 5.x is compatible with Expo 42
-
-Version 6.x is compatible with Expo 43
-
 ### Release mode
 
 Add the `.npmrc` with the authToken.
@@ -24,9 +20,9 @@ Start with the following dependencies in package.json. The major version numbers
 
 ```json
 "dependencies": {
-  "@healthblocks-io/apollo": "5",
-  "@healthblocks-io/core": "5",
-  "@healthblocks-io/native": "5",
+  "@healthblocks-io/apollo": "3",
+  "@healthblocks-io/core": "3",
+  "@healthblocks-io/native": "3",
 }
 ```
 

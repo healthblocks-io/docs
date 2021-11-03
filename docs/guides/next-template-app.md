@@ -1,5 +1,5 @@
 ---
-title: Next.js questionnaire
+title: Getting started with Next.js & questionnaires
 ---
 
 ### Use cases:

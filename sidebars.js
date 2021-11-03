@@ -3,24 +3,40 @@ module.exports = {
     'getting-started',
     {
       type: 'category',
-      label: 'Guides',
-      collapsed: false,
+      label: 'React Native',
       items: [
         'guides/expo-template-app',
-        'guides/next-template-app',
-        'guides/express',
         'guides/analytics-tracking-events',
-        'guides/translations',
-        'guides/graphiql-console',
         'guides/e2e-testing-with-detox',
+        'guides/translations',
         'guides/upgrade',
       ],
     },
     {
       type: 'category',
+      label: 'React',
+      items: ['guides/next-template-app'],
+    },
+    {
+      type: 'category',
+      label: 'Dashboard',
+      items: ['guides/graphiql-console'],
+    },
+    {
+      type: 'category',
+      label: 'Server',
+      // collapsed: false,
+      items: ['deploy/aws', 'deploy/gcp', 'guides/express'],
+    },
+    {
+      type: 'category',
       label: 'Examples',
-      collapsed: false,
+      // collapsed: false,
       items: [
+        'examples/sign-in-screen',
+        'examples/project-config',
+        'examples/theming',
+        // 'examples/web-questionnaires',
         'examples/@healthblocks-io/core',
         'examples/@healthblocks-io/apollo',
         'examples/@healthblocks-io/native/Icon',
@@ -31,7 +47,7 @@ module.exports = {
     {
       type: 'category',
       label: 'Types',
-      collapsed: false,
+      // collapsed: false,
       items: splitModules(require('./typedoc-sidebar')),
     },
     {

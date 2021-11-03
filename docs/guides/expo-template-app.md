@@ -1,5 +1,5 @@
 ---
-title: Expo template app with Github Actions
+title: Getting started using Expo template app
 ---
 
 Here is the typical starting point when building a new patient experience.
