@@ -50,23 +50,6 @@ module.exports = {
           ],
         },
         {
-          title: 'Community',
-          items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/healthblocks',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/healthblocks',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/healthblocks',
-            },
-          ],
-        },
-        {
           title: 'More',
           items: [
             {
