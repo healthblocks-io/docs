@@ -1,8 +1,11 @@
 ---
-title: "Sign in screen"
+title: "Secure Authentication"
 ---
 
+Healthblocks Authentication is based on a rotating JWT token.
 Verify that your app is Wrapped inside `<AuthProvider>` and `<ProjectProvider>`.
+
+## Example
 
 ```tsx
 import { ProjectProvider } from '@healthblocks/core/project'
@@ -46,3 +49,22 @@ const SignInScreen = () => {
   )
 }
 ```
+
+## Available hooks
+
+`useAuth` returns the auth state and useful sign in methods.
+- `data` has the auth state
+- `loading` is true when one of the sign in methods is busy
+- `error` has the last auth error
+- `dismissError()` clears the error state
+- `signInAnonymously()` is a way to create an account without credentials
+- `signInAnonymously()` is a way to create an account without credentials
+- `signInWithToken(id_token)` is a way to sign in using Auth0 or other providers
+- `signInWithEmailAndPassword(email, password)` is a way to sign in using Auth0 email/password
+- `createUserWithEmailAndPassword(email, password, code)` is a way to create an account using email/password
+- `sendPasswordResetEmail(email)` sends a password reset email
+
+`useUser` returns the decoded id_token of the currently logged in user.
+- `sub` is the user id
+- `email` is the verified user email address
+- `phone` is the verified user phone number
