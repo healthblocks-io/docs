@@ -3,13 +3,18 @@ title: "Secure Authentication"
 ---
 
 Healthblocks Authentication is based on a rotating JWT token.
-Verify that your app is Wrapped inside `<AuthProvider>` and `<ProjectProvider>`.
 
-## Example
+### Prerequisites
+
+* Configure the Auth0 integration in project configuration.
+
+### Example
+
+First wrap your app in `<AuthProvider>` and `<ProjectProvider>`.
 
 ```tsx
 import { ProjectProvider } from '@healthblocks/core/project'
-import { AuthProvider, useAuth, useUser } from '@healthblocks/core/auth'
+import { AuthProvider } from '@healthblocks/core/auth'
 
 const App = () => {
   return (
@@ -20,6 +25,12 @@ const App = () => {
     </ProjectProvider>
   )
 }
+```
+
+Now only show the sign in screen when the user is not logged in yet.
+
+```tsx
+import { useAuth, useUser } from '@healthblocks/core/auth'
 
 const Screens = () => {
   const user = useUser()
@@ -50,7 +61,7 @@ const SignInScreen = () => {
 }
 ```
 
-## Available hooks
+### Available hooks
 
 `useAuth` returns the auth state and useful sign in methods.
 - `data` has the auth state

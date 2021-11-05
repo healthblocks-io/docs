@@ -2,6 +2,12 @@
 title: "Mixpanel"
 ---
 
+### Prerequisites
+
+* Configure a mixpanel token in project configuration.
+
+### Provider setup
+
 The recommended way to save tracking events both in Healthblocks AND in Mixpanel is like this:
 
 ```tsx

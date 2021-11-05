@@ -1,3 +1,4 @@
+/** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 module.exports = {
   docs: [
     'getting-started',
@@ -19,29 +20,18 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'React Native',
+      label: 'Guides',
       items: [
         'guides/expo-template-app',
+        'guides/next-template-app',
+        'guides/graphiql-console',
         'guides/e2e-testing-with-detox',
         'guides/translations',
         'guides/upgrade',
+        'deploy/aws',
+        'deploy/gcp',
+        'guides/express',
       ],
-    },
-    {
-      type: 'category',
-      label: 'React',
-      items: ['guides/next-template-app'],
-    },
-    {
-      type: 'category',
-      label: 'Dashboard',
-      items: ['guides/graphiql-console'],
-    },
-    {
-      type: 'category',
-      label: 'Server',
-      // collapsed: false,
-      items: ['deploy/aws', 'deploy/gcp', 'guides/express'],
     },
     {
       type: 'category',

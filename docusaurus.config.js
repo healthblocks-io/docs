@@ -1,5 +1,11 @@
-/** @type {import('@docusaurus/types').DocusaurusConfig} */
-module.exports = {
+// @ts-check
+// Note: type annotations allow type checking and IDEs autocompletion
+
+const lightCodeTheme = require('prism-react-renderer/themes/github')
+const darkCodeTheme = require('prism-react-renderer/themes/dracula')
+
+/** @type {import('@docusaurus/types').Config} */
+const config = {
   title: 'Healthblocks',
   tagline: 'Build engaging digital health solutions, faster.',
   url: 'https://docs.healthblocks.io',
@@ -9,66 +15,73 @@ module.exports = {
   favicon: 'img/healthblocks-logo-white.png',
   organizationName: 'healthblocks-io', // Usually your GitHub org/user name.
   projectName: 'docs', // Usually your repo name.
-  themeConfig: {
-    navbar: {
-      title: 'Healthblocks',
-      logo: {
-        alt: 'Healthblocks Logo',
-        src: 'img/healthblocks-logo-white-round.png',
+
+  themeConfig:
+    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+    {
+      navbar: {
+        title: 'Healthblocks',
+        logo: {
+          alt: 'Healthblocks Logo',
+          src: '/img/healthblocks-logo-white-round.png',
+        },
+        items: [
+          { to: '/docs', label: 'Docs', position: 'left' },
+          { to: '/api', label: 'API', position: 'left' },
+          { to: '/blog', label: 'Blog', position: 'left' },
+          {
+            href: 'https://github.com/healthblocks-io/docs',
+            label: 'GitHub',
+            position: 'right',
+          },
+        ],
       },
-      items: [
-        {
-          to: 'docs',
-          activeBasePath: 'docs',
-          label: 'Docs',
-          position: 'left',
-        },
-        {
-          to: 'api',
-          activeBasePath: 'api',
-          label: 'API',
-          position: 'left',
-        },
-        { to: 'blog', label: 'Blog', position: 'left' },
-        {
-          href: 'https://github.com/healthblocks-io/docs',
-          label: 'GitHub',
-          position: 'right',
-        },
-      ],
+      footer: {
+        style: 'dark',
+        links: [
+          {
+            title: 'Docs',
+            items: [
+              {
+                label: 'Docs',
+                to: '/docs',
+              },
+              {
+                label: 'API',
+                to: '/api',
+              },
+              {
+                label: 'Blog',
+                to: '/blog',
+              },
+            ],
+          },
+          {
+            title: 'More',
+            items: [
+              {
+                label: 'Blog',
+                to: '/blog',
+              },
+              {
+                label: 'GitHub',
+                href: 'https://github.com/healthblocks-io/docs',
+              },
+            ],
+          },
+        ],
+
+        copyright: `Copyright © ${new Date().getFullYear()} Healthblocks.`,
+      },
+      prism: {
+        theme: lightCodeTheme,
+        darkTheme: darkCodeTheme,
+      },
     },
-    footer: {
-      style: 'dark',
-      links: [
-        {
-          title: 'Docs',
-          items: [
-            {
-              label: 'Getting Started',
-              to: 'docs/',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'Blog',
-              to: 'blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/healthblocks-io/docs',
-            },
-          ],
-        },
-      ],
-      copyright: `Copyright © ${new Date().getFullYear()} Healthblocks.`,
-    },
-  },
   presets: [
     [
       '@docusaurus/preset-classic',
+      /** @type {import('@docusaurus/preset-classic').Options} */
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
@@ -160,3 +173,4 @@ if (process.env.GENERATE_TYPEDOC) {
     },
   ])
 }
+module.exports = config

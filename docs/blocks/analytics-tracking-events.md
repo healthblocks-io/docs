@@ -1,8 +1,18 @@
 ---
-title: Analytics tracking events
+title: Analytics
 ---
 
 To build an amazing patient experience it's vitally important to understand the patient behaviour. An important tool for learning about usage is the analytics block. The dashboard and template-app track many user actions. 
+
+### Prerequisites
+
+* Configure a mixpanel token in project configuration when using MixpanelProvider.
+
+### Provider setup
+
+You app may be emitting tracking events, but unless you wrap it in a provider, those events won't be saved.  
+`<AnalyticsProvider>` delivers events to the Healthblocks API.
+`<MixpanelProvider>` delivers events to the Mixpanel API.
 
 ```tsx
 <AnalyticsProvider>

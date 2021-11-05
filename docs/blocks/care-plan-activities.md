@@ -4,7 +4,9 @@ title: "Care Plan"
 
 A care plan represents a list of planned/proposed care activities.
 
-Let's use this as a base:
+### Provider setup
+
+Enable the `useFHIR()` hook using the `<FHIRProvider>`.
 
 ```tsx
 import { FHIRProvider } from '@healthblocks-io/core/fhir'
@@ -21,7 +23,7 @@ function ProjectApp () {}
 }
 ```
 
-The FHIRProvider enables the use of the `useFHIR()` hook. This can be used to load the activities we want to show on a calendar:
+Now we can load the activities we want to show on a calendar:
 
 ```tsx
 import { useSearch } from '@healthblocks-io/core/fhir'

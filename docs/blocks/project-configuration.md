@@ -4,6 +4,13 @@ title: "Project configuration"
 
 It's recommended to store configuration at the project level. This is available in the [Project Settings](https://dashboard.healthblocks.io/dr-corona/general). Standard and default settings are merged in the project object. Warning: project settings are public, anyone downloading your app can look into it.
 
+### Prerequisites
+
+* Create a project in the Healthblocks dashboard.
+
+### Example
+
+
 The API endpoint for this data is: `/api/projects/example` where you should replace dr-corona with your pid.
 
 The recommended way to read project configuration is through the `useConfig()` hook. You should pass a function that selects the specific configuration option. This will allow future optimization that reduces rerenders when the project configuration is reloaded.
