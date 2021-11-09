@@ -27,8 +27,7 @@ Now let's use `useSearch()` to retrieve all observations.
 
 ```tsx
 import { useSearch } from '@healthblocks-io/core/fhir'
-import { toTimeChart } from '@healthblocks-io/core/observation'
-import { Observation } from '@healthblocks-io/core/types'
+import type { Observation } from '@healthblocks-io/core/types'
 
 function Example() {
   const search = useSearch<Observation>({ type: 'Observation' })
@@ -44,18 +43,41 @@ function Example() {
 }
 ```
 
-### Chart.js
+### Render a chart using Chart.js
 
 There is a function `toTimeChart(observations)` available that prepares observations for passing them to Chart.js
 
 ```tsx
 import { useSearch } from '@healthblocks-io/core/fhir'
 import { toTimeChart } from '@healthblocks-io/core/observation'
-import { Observation } from '@healthblocks-io/core/types'
+import type { Observation } from '@healthblocks-io/core/types'
 
 function ChartExample () {
-  const search = useSearch<Observation>({ type: 'Observation' })
-  const chart = toTimeChart(search.data?.entry)
+  const { data } = useSearch<Observation>({ type: 'Observation' })
+  const chart = toTimeChart(data?.entry)
   return chart && <ChartJS chart={chart} />
+}
+```
+
+### Poll for the latest observations
+
+Let's see if the response was actually saved by creating a page that shows all responses.
+
+```tsx
+import { useSearch } from '@healthblocks-io/core/fhir'
+import { observationValue } from '@healthblocks-io/core/observation'
+import type { Observation } from '@healthblocks-io/core/types'
+
+function Example() {
+  const { data, refetch } = useSearch<Observation>({ type: 'Observation' })
+  const latest = data?.entry[0]
+  const quantity = latest ? observationValue(latest) : null
+
+  useEffect(() => {
+    const interval = setInterval(refetch, 5000)
+    return () => clearInterval(interval)
+  }, [refetch])
+
+  return quantity ? <div><b>{quantity.value}</b> {quantity.unit}</div> : null
 }
 ```

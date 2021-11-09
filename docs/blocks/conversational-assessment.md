@@ -82,7 +82,6 @@ function Example () {
 
 ### Submit a response
 
-
 ```tsx
 import { useQuestionnaireByName } from '@healthblocks-io/core/content'
 import { saveQuestionnaireResponseActivity, Answer } from '@healthblocks-io/apollo/questionnaire'
@@ -138,3 +137,31 @@ const Questionnaire = () => {
 }
 ```
 
+### Show my previous responses
+
+Let's see if the response was actually saved by creating a page that shows all responses.
+
+```tsx
+import { useSearch } from '@healthblocks-io/core/fhir'
+
+function Responses () {
+  const { data, error, loading } = useSearch<QuestionnaireResponse>({
+    type: 'QuestionnaireResponse',
+  })
+
+  return (
+    <div className="responses">
+      {data?.entry.map((response, key) => (
+        <div className="response" key={key}>
+          {response.questionnaire.title}
+          {response.answers.map((answer) => (
+            <div className="response" key={key}>
+              {answer.text}
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  )
+}
+```
